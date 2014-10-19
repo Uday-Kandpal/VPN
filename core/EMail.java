@@ -31,12 +31,19 @@ public class EMail {
         return e;
     }
 
+    public String filter(String s){
+        if(s.contains(":"))
+            return s.split(":").trim();
+        return s;
+    }
+    
     public static EMail fromString(String mail) {
         EMail e = new EMail();
         String keyPairs[] = mail.split("\n");
-        for (int i = 0; i < keyPairs.length; i++) {
-
-        }
+        e.senderAddress = filter(keyPairs[0]);
+        e.receiverAddress = filter(keyPairs[1]);
+        e.subject = filter(keyPairs[2]);
+        e.message = filter(keyPairs[3]);
         return e;
     }
 
